@@ -18,6 +18,7 @@ curl --silent https://dumps.wikimedia.org/wikidatawiki/entities/latest-all.json.
   gzip --decompress |
   # Prefilter to keep only entities that refer to a valid P31 value in some way
   grep --file indexed_types_ids |
+  grep "Q45705732" -A 1000000000 |
   # Drop end-of-line comma to produce valid ndjson
   sed 's/,$//' |
   ./scripts/indexation/load.js wikidata

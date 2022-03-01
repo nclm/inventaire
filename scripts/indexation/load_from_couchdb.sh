@@ -61,7 +61,7 @@ docs_indexed_before=$(docs_indexed)
 
 echo "docs indexed before starting: $docs_indexed_before"
 
-curl -s "${couchdb_auth_host}/${database_name}/_all_docs?include_docs=true" |
+curl -s "${couchdb_auth_host}/${database_name}/_all_docs?include_docs=true&skip=731206" |
   # Omit lines that aren't rows (the first and the last lines)
   grep '{"id"' |
   # Drop end of line comma so that each line is a valid JSON object
