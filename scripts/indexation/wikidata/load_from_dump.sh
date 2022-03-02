@@ -14,13 +14,12 @@ node --print "require('module-alias/register') ; JSON.stringify(require('./serve
   # Get the id, wrapped between double quotes
   sed -E 's/wd:(Q.*)/"\1"/' > indexed_types_ids
 
-curl --silent https://dumps.wikimedia.org/wikidatawiki/entities/latest-all.json.gz |
-  gzip --decompress |
+gzip --decompress < /home/admin/wikidata_dump_filtered_entities_simplified_2022-03-02.ndjson.gz |
   # Prefilter to keep only entities that refer to a valid P31 value in some way
-  grep --file indexed_types_ids |
+  # grep --file indexed_types_ids |
   grep "Q45705732" -A 1000000000 |
   # Drop end-of-line comma to produce valid ndjson
-  sed 's/,$//' |
+  # sed 's/,$//' |
   ./scripts/indexation/load.js wikidata
 
 rm indexed_types_ids
