@@ -17,6 +17,8 @@ import wdOauth from './wikidata_oauth.js'
 export default async (user, id, property, oldValue, newValue) => {
   wdOauth.validate(user)
 
+  await validateWdEntityUpdate({ id, property, oldValue, newValue })
+
   if ((properties[property].datatype === 'entity')) {
     if (_.isInvEntityUri(newValue)) {
       throw error_.new("wikidata entities can't link to inventaire entities", 400)
@@ -33,8 +35,6 @@ export default async (user, id, property, oldValue, newValue) => {
   }
 
   const credentials = wdOauth.getOauthCredentials(user)
-
-  await validateWdEntityUpdate({ id, property, oldValue, newValue })
 
   let res
 
