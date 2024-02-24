@@ -50,7 +50,7 @@ export const update = (id, attribute, value) => {
 
 export const checkEntities = uris => {
   uris = forceArray(uris)
-  return adminReq('post', `${endpoint}check-entities`, { uris })
+  return adminReq('post', `${endpoint}check-human-duplicates`, { uris })
   .then(() => getBySuspectUris(uris))
   .then(getTasksBySuspectUris => Object.values(getTasksBySuspectUris).flat())
 }
