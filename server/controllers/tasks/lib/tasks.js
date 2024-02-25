@@ -53,10 +53,10 @@ export const getTasksByScore = options => {
 }
 
 export const getTasksByEntitiesType = options => {
-  const { type, limit, offset } = options
-  return db.viewCustom('byEntitiesType', {
-    startkey: type,
-    endkey: type,
+  const { type, entitiesType, limit, offset } = options
+  return db.viewCustom('byTypeAndEntitiesType', {
+    startkey: [ type, entitiesType ],
+    endkey: [ type, entitiesType ],
     limit,
     skip: offset,
     include_docs: true,
