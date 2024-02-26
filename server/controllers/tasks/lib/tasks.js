@@ -53,6 +53,8 @@ export const getTasksByScore = options => {
 }
 
 export const getTasksByEntitiesType = options => {
+  // Only tasks with a key `reporter` will be requested.
+  // To query tasks without, see getTasksByScore
   const { type, entitiesType, limit, offset } = options
   return db.viewCustom('byTypeAndEntitiesType', {
     startkey: [ type, entitiesType ],
