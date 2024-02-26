@@ -37,7 +37,7 @@ describe('tasks:hooks', () => {
       const task = await createTask(taskParams)
       await merge(suspect.uri, suggestion.uri)
       await wait(100)
-      const [ updatedTask ] = await getByIds(task.id)
+      const [ updatedTask ] = await getByIds(task._id)
       updatedTask.state.should.equal('merged')
     })
   })
