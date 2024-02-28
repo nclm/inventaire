@@ -81,8 +81,8 @@ export async function getTasksBySuspectUris (suspectUris, options = {}) {
   const { index, includeArchived } = options
   const tasks = await db.viewByKeys('bySuspectUriAndState', getKeys(suspectUris, includeArchived))
   if (index !== true) return tasks
-  const getTasksBySuspectUris = groupBy(tasks, 'suspectUri')
-  return completeWithEmptyArrays(getTasksBySuspectUris, suspectUris)
+  const tasksBySuspectUris = groupBy(tasks, 'suspectUri')
+  return fillWithEmptyArrays(tasksBySuspectUris, suspectUris)
 }
 
 export async function getTasksBySuggestionUris (suggestionUris, options = {}) {
@@ -90,7 +90,7 @@ export async function getTasksBySuggestionUris (suggestionUris, options = {}) {
   const tasks = await db.viewByKeys('bySuggestionUriAndState', getKeys(suggestionUris, includeArchived))
   if (index !== true) return tasks
   const getTasksBySuggestionUris = groupBy(tasks, 'suggestionUri')
-  return completeWithEmptyArrays(getTasksBySuggestionUris, suggestionUris)
+  return fillWithEmptyArrays(getTasksBySuggestionUris, suggestionUris)
 }
 
 const getKeys = (uris, includeArchived) => {
@@ -103,7 +103,7 @@ const getKeys = (uris, includeArchived) => {
 
 const buildKey = state => uri => [ uri, state ]
 
-const completeWithEmptyArrays = (getTasksByUris, uris) => {
+const fillWithEmptyArrays = (getTasksByUris, uris) => {
   for (const uri of uris) {
     if (getTasksByUris[uri] == null) getTasksByUris[uri] = []
   }
