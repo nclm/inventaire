@@ -1,7 +1,7 @@
 import { forceArray } from '#lib/utils/base'
 import { publicReq, adminReq } from './utils.js'
 
-const endpoint = '/api/tasks?action='
+export const endpoint = '/api/tasks?action='
 
 export const getByIds = ids => {
   ids = forceArray(ids).join('|')
@@ -9,9 +9,9 @@ export const getByIds = ids => {
   .then(({ tasks }) => tasks)
 }
 
-export const getBySuspectUris = uris => {
+export const getBySuspectUris = (uris, type = 'deduplicate') => {
   uris = forceArray(uris).join('|')
-  return publicReq('get', `${endpoint}by-suspect-uris&uris=${uris}`)
+  return publicReq('get', `${endpoint}by-suspect-uris&uris=${uris}&type=${type}`)
   .then(({ tasks }) => tasks)
 }
 
@@ -20,9 +20,9 @@ export const getBySuspectUri = uri => {
   .then(obj => obj[uri])
 }
 
-export const getBySuggestionUris = uris => {
+export const getBySuggestionUris = (uris, type = 'deduplicate') => {
   uris = forceArray(uris).join('|')
-  return publicReq('get', `${endpoint}by-suggestion-uris&uris=${uris}`)
+  return publicReq('get', `${endpoint}by-suggestion-uris&uris=${uris}&type=${type}`)
   .then(({ tasks }) => tasks)
 }
 

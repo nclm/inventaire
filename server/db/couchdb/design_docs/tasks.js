@@ -1,4 +1,11 @@
 export default {
+  bySuspectUriAndType: {
+    map: doc => {
+      if (!doc.state) {
+        emit([ doc.suspectUri, doc.type ], null)
+      }
+    },
+  },
   bySuspectUriAndState: {
     map: doc => {
       emit([ doc.suspectUri, doc.state ], null)
