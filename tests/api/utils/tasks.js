@@ -11,7 +11,7 @@ export const getByIds = ids => {
 
 export const getBySuspectUris = (uris, type = 'deduplicate') => {
   uris = forceArray(uris).join('|')
-  return publicReq('get', `${endpoint}by-suspect-uris&uris=${uris}&type=${type}`)
+  return publicReq('get', `${endpoint}by-uris&uris=${uris}&type=${type}`)
   .then(({ tasks }) => tasks)
 }
 
