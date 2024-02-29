@@ -94,7 +94,7 @@ export async function getTasksBySuggestionUris (uris, options = {}) {
   const { index, includeArchived } = options
   const tasks = await db.viewByKeys('bySuggestionUriAndState', getKeys(uris, includeArchived))
   if (index !== true) return tasks
-  return indexByTasksKey(tasks, 'suspectUri', uris)
+  return indexByTasksKey(tasks, 'suggestionUri', uris)
 }
 
 function indexByTasksKey (tasks, key, tasksUris) {
