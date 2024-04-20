@@ -72,6 +72,7 @@ const wikidataOnlyP31Values = {
     'wd:Q11826511', // work of science
     'wd:Q116476516', // dramatic work
     'wd:Q11825892', // young adult novel
+    'wd:Q56855534', // comic story
   ],
   editions: [
     'wd:Q3972943', // publishing
